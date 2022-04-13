@@ -14,6 +14,7 @@ require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
 const res = require("express/lib/response");
+const e = require("express");
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cetyr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -99,7 +100,7 @@ async function run() {
             const singleOrder = orderCollection.find({});
             const order = await singleOrder.toArray();
             const customerOrder =  order.filter(
-                (mail) = (mail?.email === email)
+                (e) = (e?.email === email)
             );
             res.json(customerOrder);
         });
