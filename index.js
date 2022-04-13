@@ -103,7 +103,14 @@ async function run() {
         res.json(order);
       });
 
-      // post order
+       // get all order
+       app.get("/orders", async (req, res) => {
+        const cursor = orderCollection.find({});
+        const result = await cursor.toArray();
+        res.json(result);
+      });
+
+      // post order..
       app.post("/orders", async (req, res) => {
         const order = req.body;
         const result = await orderCollection.insertOne(order);
