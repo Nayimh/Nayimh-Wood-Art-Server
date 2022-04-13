@@ -99,7 +99,7 @@ async function run() {
             const singleOrder = orderCollection.find({});
             const order = await singleOrder.toArray();
             const customerOrder =  order.filter(
-                (email) = (email?.email === email)
+                (mail) = (mail?.email === email)
             );
             res.json(customerOrder);
         });
