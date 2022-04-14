@@ -66,7 +66,7 @@ async function run() {
             furniturePrice: updateFurniture?.price,
           },
         };
-        const result = furnitureCollection.updateOne(
+        const result =  furnitureCollection.updateOne(
           filter,
           option,
           updateDoc
@@ -125,6 +125,7 @@ async function run() {
         res.json(deleteOrder);
       });
 
+       
        // update Order
        app.put("/orders/:id", async (req, res) => {
         const statusId = req.params.id;
@@ -142,7 +143,7 @@ async function run() {
           option
         );
         res.json(acceptstatus);
-       });
+      });
         
         
       // post ratings
@@ -179,7 +180,6 @@ async function run() {
       });
 
       // userSection
-      // post user
       // post user
       app.post("/users", async (req, res) => {
         const user = req.body;
@@ -238,7 +238,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send("Wood-Art server running successfully..");
+    res.send("Wood-Art server running successfully");
 })
 
 
