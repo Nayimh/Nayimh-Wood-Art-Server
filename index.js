@@ -1,9 +1,9 @@
 const express = require("express");
 
 const app = express();
-
+//cors
 const cors = require("cors");
-
+//port
 const port = process.env.PORT || 5000;
 
 // middle ware
@@ -22,7 +22,7 @@ async function run() {
     try {
       await client.connect();
       const database = client.db("WoodArt");
-
+      //db collection
       const furnitureCollection = database.collection("furniture");
       const orderCollection = database.collection("orders");
       const reviewCollection = database.collection("reviews");
@@ -84,16 +84,7 @@ async function run() {
 
       // Order section
 
-      // get order by email
-      app.get("/orders/:email", async (req, res) => {
-        const email = req.params.email;
-        const singleOrder = orderCollection.find({});
-        const orders = await singleOrder.toArray();
-        const customerOrder = orders.filter(
-          (mail) => (mail.email === email)
-        );
-        res.send(customerOrder);
-      });
+   
 
       // get Single Order
       app.get("/orders/:id", async (req, res) => {
@@ -103,12 +94,18 @@ async function run() {
         res.json(order);
       });
 
-       // get all order
-       app.get("/orders", async (req, res) => {
-        const cursor = orderCollection.find({});
-        const result = await cursor.toArray();
-        res.json(result);
-      });
+         // get order by email
+         app.get("/orders/:email", async (req, res) => {
+          const email = req.params.email;
+          const singleOrder = orderCollection.find({});
+          const orders = await singleOrder.toArray();
+          const customerOrder = orders.filter(
+            (mail) => (mail.email === email)
+          );
+          res.send(customerOrder);
+        });
+
+      
 
       // post order..
       app.post("/orders", async (req, res) => {
