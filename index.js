@@ -13,7 +13,7 @@ app.use(express.json());
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
-// const res = require("express/lib/response");
+const res = require("express/lib/response");
 const e = require("express");
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cetyr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
@@ -51,28 +51,28 @@ async function run() {
         res.send(food);
       });
 
-      // update
-      app.put("/furniture/:id", async (req, res) => {
-        const id = req.params.id;
-        const updateFurniture = req.body;
-        const filter = { _id: ObjectId(id) };
-        const option = { upsert: true };
-        const updateDoc = {
-          $set: {
-            furnitureName: updateFurniture?.name,
-            description: updateFurniture?.desc,
-            furnitureImage: updateFurniture?.img,
-            madeBy: updateFurniture?.by,
-            furniturePrice: updateFurniture?.price,
-          },
-        };
-        const result =  furnitureCollection.updateOne(
-          filter,
-          option,
-          updateDoc
-        );
-        res.json(result);
-      });
+      // // update
+      // app.put("/furniture/:id", async (req, res) => {
+      //   const id = req.params.id;
+      //   const updateFurniture = req.body;
+      //   const filter = { _id: ObjectId(id) };
+      //   const option = { upsert: true };
+      //   const updateDoc = {
+      //     $set: {
+      //       furnitureName: updateFurniture?.name,
+      //       description: updateFurniture?.desc,
+      //       furnitureImage: updateFurniture?.img,
+      //       madeBy: updateFurniture?.by,
+      //       furniturePrice: updateFurniture?.price,
+      //     },
+      //   };
+      //   const result =  furnitureCollection.updateOne(
+      //     filter,
+      //     option,
+      //     updateDoc
+      //   );
+      //   res.json(result);
+      // });
 
       // delete
       app.delete("/furniture/:id", async (req, res) => {
